@@ -9,7 +9,7 @@ Flask (JSON) → FastAPI (Ingest) → PostgreSQL → API Response
 ```
 
 | Service          | Port | Description                          |
-|------------------|------|--------------------------------------|
+| ---------------- | ---- | ------------------------------------ |
 | mock-server      | 5000 | Flask API serving customer JSON data |
 | pipeline-service | 8000 | FastAPI ingestion + query endpoints  |
 | postgres         | 5432 | PostgreSQL 15 data storage           |
@@ -21,6 +21,7 @@ Flask (JSON) → FastAPI (Ingest) → PostgreSQL → API Response
 - Git
 
 Verify Docker Compose:
+
 ```bash
 docker-compose --version
 ```
@@ -39,20 +40,20 @@ curl -X POST http://localhost:8000/api/ingest
 
 ### Flask Mock Server (port 5000)
 
-| Endpoint                | Method | Description                        |
-|-------------------------|--------|------------------------------------|
-| `/api/customers`        | GET    | Paginated list (`page`, `limit`)   |
-| `/api/customers/{id}`   | GET    | Single customer by `customer_id`   |
-| `/api/health`           | GET    | Health check                       |
+| Endpoint              | Method | Description                      |
+| --------------------- | ------ | -------------------------------- |
+| `/api/customers`      | GET    | Paginated list (`page`, `limit`) |
+| `/api/customers/{id}` | GET    | Single customer by `customer_id` |
+| `/api/health`         | GET    | Health check                     |
 
 ### FastAPI Pipeline (port 8000)
 
-| Endpoint                | Method | Description                              |
-|-------------------------|--------|------------------------------------------|
-| `/api/ingest`           | POST   | Fetch from Flask & upsert into Postgres  |
-| `/api/customers`        | GET    | Paginated list from DB (`page`, `limit`) |
-| `/api/customers/{id}`   | GET    | Single customer from DB                  |
-| `/api/health`           | GET    | Health check                             |
+| Endpoint              | Method | Description                              |
+| --------------------- | ------ | ---------------------------------------- |
+| `/api/ingest`         | POST   | Fetch from Flask & upsert into Postgres  |
+| `/api/customers`      | GET    | Paginated list from DB (`page`, `limit`) |
+| `/api/customers/{id}` | GET    | Single customer from DB                  |
+| `/api/health`         | GET    | Health check                             |
 
 ## Testing
 
@@ -87,7 +88,6 @@ project-root/
     │   ├── __init__.py
     │   └── customer.py
     ├── services/
-    │   ├── __init__.py
     │   └── ingestion.py
     ├── database.py
     ├── Dockerfile
